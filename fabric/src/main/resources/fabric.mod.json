@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "playersaddle",
+  "version": "${version}",
+  "name": "Player Saddle",
+  "description": "Saddle up and carry your friends on your back!",
+  "authors": ["omerbenda"],
+  "license": "AGPL-3.0",
+  "icon": "assets/playersaddle/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.omerbenda.playersaddle.fabric.PlayerSaddleModFabric"
+    ],
+    "client": [
+      "com.omerbenda.playersaddle.fabric.client.PlayerSaddleModFabricClient"
+    ]
+  },
+  "mixins": [
+    "playersaddle.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "architectury": ">=13.0.11",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+#issueTrackerURL = ""
+license = "AGPL-3.0"
+
+[[mods]]
+modId = "playersaddle"
+version = "${version}"
+displayName = "Player Saddle"
+authors = "omerbenda"
+description = '''
+Saddle up and carry your friends on your back!
+'''
+#logoFile = ""
+
+[[dependencies.playersaddle]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.playersaddle]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.playersaddle]]
+modId = "architectury"
+type = "required"
+versionRange = "[13.0.11,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mixins]]
+config = "playersaddle.mixins.json"

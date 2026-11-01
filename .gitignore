@@ -1,0 +1,31 @@
+# Gradle build artifacts and caches
+.gradle/
+build/
+out/
+bin/
+classes/
+libs/
+output/
+
+# Minecraft run directories (where test client/server data is generated)
+run/
+
+# IntelliJ IDEA
+.idea/
+*.ipr
+*.iws
+*.iml
+
+# Eclipse
+.classpath
+.project
+.metadata
+.settings/
+*.launch
+
+# Visual Studio Code
+.vscode/
+
+# Operating System specific files
+.DS_Store
+Thumbs.db
