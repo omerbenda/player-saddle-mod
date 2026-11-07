@@ -59,7 +59,7 @@ public class PlayerSaddle {
 
     Player sourcePlayer = evt.getEntity();
 
-    if (hasItemCurio(targetEntity, Items.SADDLE)) {
+    if (hasItemCurio(targetEntity, Items.SADDLE) && targetEntity.getPassengers().isEmpty()) {
       boolean success = sourcePlayer.startRiding(targetEntity, true);
 
       if (!success) {
