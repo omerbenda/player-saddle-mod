@@ -38,11 +38,13 @@ minecraft {
 
         client {
             property 'forge.enabledGameTestNamespaces', mod_id
+            args '--mixin', 'playersaddle.mixins.json'
         }
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
+            args '--mixin', 'playersaddle.mixins.json'
         }
 
         gameTestServer {
