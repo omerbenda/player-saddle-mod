@@ -1,5 +1,8 @@
 package com.omerbenda.playersaddle;
 
+import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -41,20 +44,39 @@ public class PlayerSaddle {
             for (Entity passenger : entity.getPassengers()) {
               passenger.unRide();
             }
+
+            if (entity instanceof ServerPlayer serverPlayer) {
+              syncPassengers(serverPlayer);
+            }
           }
         });
   }
 
   private void onPlayerEntityInteract(PlayerInteractEvent.EntityInteract evt) {
-    if (!(evt.getTarget() instanceof Player targetedPlayer)) {
+    if (!(evt.getTarget() instanceof LivingEntity targetEntity)) {
       return;
     }
 
     Player sourcePlayer = evt.getEntity();
 
-    if (hasItemCurio(targetedPlayer, Items.SADDLE)) {
-      sourcePlayer.startRiding(targetedPlayer);
+    if (hasItemCurio(targetEntity, Items.SADDLE)) {
+      boolean success = sourcePlayer.startRiding(targetEntity, true);
+
+      if (!success) {
+        return;
+      }
+
+      if (targetEntity instanceof ServerPlayer targetedServerPlayer) {
+        syncPassengers(targetedServerPlayer);
+      }
+
+      evt.setCanceled(true);
+      evt.setCancellationResult(InteractionResult.SUCCESS);
     }
+  }
+
+  private static void syncPassengers(ServerPlayer serverPlayer) {
+    serverPlayer.connection.send(new ClientboundSetPassengersPacket(serverPlayer));
   }
 
   private static boolean hasItemCurio(LivingEntity entity, Item itemType) {
