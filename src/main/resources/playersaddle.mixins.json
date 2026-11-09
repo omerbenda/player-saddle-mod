@@ -6,7 +6,9 @@
   "mixins": [
     "PlayerRiderOffsetMixin"
   ],
-  "client": [],
+  "client": [
+    "client.GameRendererMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
