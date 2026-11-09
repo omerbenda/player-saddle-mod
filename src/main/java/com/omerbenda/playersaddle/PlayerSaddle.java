@@ -1,5 +1,6 @@
 package com.omerbenda.playersaddle;
 
+import com.omerbenda.playersaddle.client.renderers.HeadSaddleCurioRenderer;
 import net.minecraft.network.protocol.game.ClientboundSetPassengersPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 @Mod(PlayerSaddle.MOD_ID)
@@ -50,6 +52,8 @@ public class PlayerSaddle {
             }
           }
         });
+
+    CuriosRendererRegistry.register(Items.SADDLE, HeadSaddleCurioRenderer::new);
   }
 
   private void onPlayerEntityInteract(PlayerInteractEvent.EntityInteract evt) {
