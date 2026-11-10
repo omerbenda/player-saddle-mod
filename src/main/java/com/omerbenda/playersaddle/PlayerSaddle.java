@@ -7,7 +7,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
@@ -63,7 +62,8 @@ public class PlayerSaddle {
 
     Player sourcePlayer = evt.getEntity();
 
-    if (hasItemCurio(targetEntity, Items.SADDLE) && targetEntity.getPassengers().isEmpty()) {
+    if (PSCurioHelper.hasItemCurio(targetEntity, Items.SADDLE)
+        && targetEntity.getPassengers().isEmpty()) {
       boolean success = sourcePlayer.startRiding(targetEntity, true);
 
       if (!success) {
@@ -81,11 +81,5 @@ public class PlayerSaddle {
 
   private static void syncPassengers(ServerPlayer serverPlayer) {
     serverPlayer.connection.send(new ClientboundSetPassengersPacket(serverPlayer));
-  }
-
-  private static boolean hasItemCurio(LivingEntity entity, Item itemType) {
-    return CuriosApi.getCuriosInventory(entity)
-        .map(inventory -> inventory.findFirstCurio(itemType).isPresent())
-        .orElse(false);
   }
 }
