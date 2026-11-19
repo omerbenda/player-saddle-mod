@@ -1,6 +1,8 @@
 package com.omerbenda.playersaddle.mixin.client;
 
 import java.util.function.Predicate;
+
+import com.omerbenda.playersaddle.PSServerConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.entity.Entity;
@@ -41,7 +43,7 @@ public abstract class GameRendererMixin {
       return false;
     }
 
-    if (!cameraEntity.isShiftKeyDown()) {
+    if (!cameraEntity.isShiftKeyDown() || !PSServerConfig.CONFIG.canHurtRider.get()) {
       return true;
     }
 
