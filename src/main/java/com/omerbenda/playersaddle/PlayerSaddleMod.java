@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -20,16 +21,18 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-@Mod(PlayerSaddle.MOD_ID)
-public class PlayerSaddle {
+@Mod(PlayerSaddleMod.MOD_ID)
+public class PlayerSaddleMod {
   public static final String MOD_ID = "playersaddle";
 
-  public PlayerSaddle(FMLJavaModLoadingContext context) {
+  public PlayerSaddleMod(FMLJavaModLoadingContext context) {
     final IEventBus modEventBus = context.getModEventBus();
     final IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
     modEventBus.addListener(this::onSetup);
     forgeEventBus.addListener(this::onPlayerEntityInteract);
+
+    context.registerConfig(ModConfig.Type.SERVER, PSServerConfig.CONFIG_SPEC);
   }
 
   private void onSetup(FMLCommonSetupEvent evt) {
